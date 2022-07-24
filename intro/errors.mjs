@@ -1,7 +1,7 @@
 // handling async errors (1)
 
 import { readFile } from 'fs/promises'
-using callback
+//using callback
 readFile(new URL('index.mjs', import.meta.url), 'utf-8', (error, data)=> {
     if (error) {
         throw error
