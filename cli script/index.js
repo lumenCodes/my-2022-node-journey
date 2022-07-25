@@ -4,6 +4,7 @@ console.log('I am building a CLI')
 
 let cmdArgs = require('minimist')
 
+var name = process.argv[2]
 var argv = cmdArgs(['help', 'jsjdj'],cmdArgs.string)
     // (process.argv.slice(2), {
     //     Boolean: ['help', 'isLive'],
