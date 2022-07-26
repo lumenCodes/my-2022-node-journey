@@ -23,17 +23,32 @@ try {
     });
 
     app.post('/createBook', (req, res) => {
-        if (!req.body){
-            console.error('Please add name of the book.')
+        if (req.body == ''){
+            res.send('Please add name of the book.')
         }
         const newBook = 
 
         {
+            id: req.body.id,
             name: req.body.name,
             createdAt: Date.now
         }
         db.push(newBook)
         res.send(db)
+    })
+
+    app.patch('/updateBook', (req, res) => {
+        // const update = req.body
+        const updateItem = db.findIndex((obj => req.body.id))
+        db[updateItem] = req.body.name
+
+        // res.send('hello')
+        res.send(db[updateItem])
+
+    })
+
+    app.delete('/deletebook',(req,res)=>{
+        res.send('deletion successful')
     })
 } catch (error) {
     console.error(error)
