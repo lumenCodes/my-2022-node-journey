@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser'
 import express from 'express'
 
 export const app = express()
@@ -10,35 +11,54 @@ app.listen(port, (req, res) => {
     console.log(`Server is up and running on port ${port}, We are good to go...🚀`)
 })
 
-const db = []
-console.log(db)
+let db = []
 app.use(express.json())
 
 try {
     
     app.get('/home', (req, res) => {
         res.send('<h3>This book app will be used to display the list of books that a user has created</h3>' + db)
+        // db.map()
         
     });
 
+    
+
     app.post('/createBook', (req, res) => {
-        if (!(req.body)){
-            res.send('Please add name of the book.')
-        }
+        const index = db.length - 1
         const newBook = 
         {
-            id: req.body.id,
+            
+            id: index + 1,
             name: req.body.name,
-            createdAt: Date.now
+            createdAt: Date.now()
         }
+
+        // if (!newBook){
+        //     res.send('Please add name of the book.')
+        // }else{
+        //     db.push(newBook)
+        // }
+        // index = db.length - 1
         db.push(newBook)
         res.send(db)
     })
 
     app.patch('/updateBook', (req, res) => {
-        // const update = req.body
-        const updateItem = db.findIndex((obj => req.body.id))
-        db[updateItem] = req.body.name
+        let incomingUpdate = req.body
+
+        incomingUpdate.name = req.body.name
+        console.log(incomingUpdate.name)
+        incomingUpdate.id =req.body.id
+
+        let updateItem = db.filter(((x) => x.id == incomingUpdate.id))
+        console.log(updateItem[1])
+            // db[updateItem][1] = incomingUpdate.name
+            // db[updateItem.id] = incomingUpdate.id
+
+
+        // db[updateItem] = req.body.name
+        
 
         // res.send('hello')
         res.send(db[updateItem])
@@ -46,12 +66,16 @@ try {
     })
 
     app.delete('/deletebook',(req,res)=>{
-        const deleteitem = db.indexOf(req.body)
-        const deleteIndex = 2
-        const removeItem = db.splice((deleteitem, deleteIndex))
-        console.log(removeItem)
+        // const deleteitem = db.indexOf(req.body)
+        // const deleteIndex = 1
+        // const removeItem = db.splice((deleteitem, deleteIndex))
+        // console.log(removeItem)
+        if (req.body !== Number && req.body == 0) {
+            res.send('invalid request')
+        } 
+        const updatedBooks = db.filter((book)=> book.id !== req.body.id )
+       db = updatedBooks
 
-        // res.send('hello')
         res.send(db)
     })
 } catch (error) {
