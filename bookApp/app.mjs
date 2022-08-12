@@ -1,5 +1,4 @@
 import express from 'express'
-// import nodemon from 'nodemon'
 
 export const app = express()
 
@@ -23,11 +22,10 @@ try {
     });
 
     app.post('/createBook', (req, res) => {
-        if (req.body == ''){
+        if (!(req.body)){
             res.send('Please add name of the book.')
         }
         const newBook = 
-
         {
             id: req.body.id,
             name: req.body.name,
@@ -48,7 +46,13 @@ try {
     })
 
     app.delete('/deletebook',(req,res)=>{
-        res.send('deletion successful')
+        const deleteitem = db.indexOf(req.body)
+        const deleteIndex = 2
+        const removeItem = db.splice((deleteitem, deleteIndex))
+        console.log(removeItem)
+
+        // res.send('hello')
+        res.send(db)
     })
 } catch (error) {
     console.error(error)
