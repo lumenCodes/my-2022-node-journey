@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser'
 import express from 'express'
+import { ulid } from 'ulid'
 
 export const app = express()
 
@@ -29,7 +30,8 @@ try {
         const newBook = 
         {
             
-            id: index + 1,
+            // id: index + 1,
+            id: ulid(),
             name: req.body.name,
             createdAt: Date.now()
         }
