@@ -1,8 +1,8 @@
-import bodyParser from 'body-parser'
-import express from 'express'
-import { ulid } from 'ulid'
+const bodyParser = require('body-parser') 
+const express = require('express') 
+const { ulid } = require('ulid')
 
-export const app = express()
+ const app = express()
 
 
 const port = process.env.PORT || 8000
