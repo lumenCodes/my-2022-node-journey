@@ -6,7 +6,6 @@ const { ulid } = require('ulid')
 
 
 const port = process.env.PORT || 8000
-console.log(port)
 
 app.listen(port, (req, res) => {
     console.log(`Server is up and running on port ${port}, We are good to go...🚀🚀`)
