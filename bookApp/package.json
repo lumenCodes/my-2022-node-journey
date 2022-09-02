@@ -1,6 +1,10 @@
 {
   "name": "bookapp",
   "version": "1.0.0",
+  "engines": {
+    "node": "^16.x",
+    "npm": "^8.x"
+  },
   "description": "This is a simple Api to show the basic CRUD operations with a spice of authorization.",
   "main": "app.js",
   "scripts": {
